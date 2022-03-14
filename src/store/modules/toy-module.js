@@ -21,10 +21,10 @@ export default {
     setToys(state, { toys }) {
       state.toys = toys
     },
-    // removeCar(state, { id }) {
-    //   const idx = state.cars.findIndex((car) => car.id === id)
-    //   state.cars.splice(idx, 1)
-    // },
+    removeToy(state, { id }) {
+      const idx = state.toys.findIndex((toy) => toy.id === id)
+      state.toys.splice(idx, 1)
+    },
     // saveCar(state, { car }) {
     //   const idx = state.cars.findIndex((currCar) => currCar.id === car.id)
     //   if (idx !== -1) state.cars.splice(idx, 1, car)
@@ -72,11 +72,19 @@ export default {
       //   commit({ type: 'setCars', cars })
       // })
     },
-    // removeCar({ commit }, { id }) {
-    //   carService.remove(id).then(() => {
-    //     commit({ type: 'removeCar', id })
-    //   })
-    // },
+    removeToy({ commit }, { id }) {
+      commit({ type: 'removeToy', id })
+      // carService.remove(id).then(() => {
+      //   commit({ type: 'removeCar', id })
+      // })
+    },
+    getToyById(context, { id }) {
+      const toys = context.getters.toysForDisplay
+      return toys.find(toy => toy._id === id)
+      // carService.remove(id).then(() => {
+      //   commit({ type: 'removeCar', id })
+      // })
+    },
     // saveCar({ commit }, { car }) {
     //   carService.save(car).then((car) => {
     //     commit({ type: 'saveCar', car })

@@ -42,10 +42,10 @@ export default {
     // },
     removeToy(toyId) {
       console.log('removing', toyId)
-      // this.$store.dispatch({
-      //   type: 'removeTodo',
-      //   todoId,
-      // })
+      this.$store.dispatch({
+        type: 'removeToy',
+        toyId,
+      })
     },
   },
   computed: {
