@@ -40,12 +40,21 @@
 <template>
   <section v-if="toy">
     <span> {{ toy.name }} </span>
-    <ul>
+    <ul v-if="toy.labels.length" class="clean-list">
+      labels:
       <li v-for="label in toy.labels" :key="label">{{ label }}</li>
     </ul>
-    <div> price: {{ toy.price }} </div>
-    <div> {{ formatedTime }} </div>
-    <div> {{ inStock }} </div>
+    <div>price: {{ toy.price }}</div>
+    <div>{{ formatedTime }}</div>
+    <div>{{ inStock }}</div>
+    <ul v-if="toy.reviews.length" class="clean-list">
+      reviews:
+      <li v-for="review in toy.reviews" :key="review">
+        <span>{{ review.creator }}</span>
+        <span>{{ review.txt }}</span>
+        <span>{{ review.createdAt }}</span>
+      </li>
+    </ul>
     <div>
       <router-link to="/toy">Back</router-link>
       <router-link to="/toy">
@@ -97,7 +106,7 @@ export default {
   },
   watch: {
     '$route.params.toyId'() {
-      if(this.$route.params.toyId) this.loadTodo()
+      if (this.$route.params.toyId) this.loadTodo()
     },
   },
 }

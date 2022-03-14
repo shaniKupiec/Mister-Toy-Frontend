@@ -19,15 +19,17 @@ export default {
     },
     saveToy(state, { savedToy }) {
       const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
-      console.log('m- saved toy', savedToy);
-      console.log('m- idx', idx);
+      console.log('m- saved toy', savedToy)
+      console.log('m- idx', idx)
       if (idx !== -1) state.toys.splice(idx, 1, savedToy)
       else state.toys.push(savedToy)
     },
   },
   actions: {
-    loadToys({ commit }) {
-      toyService.query().then((toys) => {
+    loadToys({ commit }, { filterBy }) {
+      console.log('lodaing', filterBy);
+      toyService.query(filterBy).then((toys) => {
+        console.log('toys for display', toys);
         commit({ type: 'setToys', toys })
       })
     },
@@ -37,7 +39,7 @@ export default {
       })
     },
     getToyById(context, { toyId }) {
-      return toyService.getById(toyId).then(toy => JSON.parse(JSON.stringify(toy)))
+      return toyService.getById(toyId).then((toy) => JSON.parse(JSON.stringify(toy)))
     },
     updateToy({ commit }, { toy }) {
       const newToy = JSON.parse(JSON.stringify(toy))

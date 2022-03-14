@@ -6,7 +6,7 @@
       <span> {{ formatedTime }} </span>
       <span> {{ inStock }} </span>
       <router-link :to="'/toy/' + toy._id">Details</router-link>
-      <router-link :to="'/toy/edit/'+toy._id">Edit</router-link>
+      <router-link :to="'/toy/edit/' + toy._id">Edit</router-link>
       <button @click="removeToy">X</button>
     </div>
   </section>
@@ -40,5 +40,6 @@ export default {
     },
   },
   unmounted() {},
+  emits: ['removeToy'],
 }
 </script>

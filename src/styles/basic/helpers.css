@@ -31,6 +31,10 @@
     text-transform: uppercase
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 /* SPACING */
 
 .p-1 {
