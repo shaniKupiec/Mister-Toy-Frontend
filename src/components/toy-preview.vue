@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="toy-preview">
+    <div class="toy-preview flex gap-2">
       <span> {{ toy.name }} </span>
       <span> price: {{ toy.price }} </span>
       <span> {{ formatedTime }} </span>

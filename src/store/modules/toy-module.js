@@ -13,39 +13,33 @@ export default {
     setToys(state, { toys }) {
       state.toys = toys
     },
-    removeToy(state, { id }) {
-      const idx = state.toys.findIndex((toy) => toy.id === id)
+    removeToy(state, { toyId }) {
+      const idx = state.toys.findIndex((toy) => toy._id === toyId)
       state.toys.splice(idx, 1)
     },
     saveToy(state, { savedToy }) {
-      const idx = state.toys.findIndex((currToy) => currToy.id === savedToy.id)
+      const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
+      console.log('m- saved toy', savedToy);
+      console.log('m- idx', idx);
       if (idx !== -1) state.toys.splice(idx, 1, savedToy)
       else state.toys.push(savedToy)
     },
   },
   actions: {
     loadToys({ commit }) {
-      // commit({ type: 'setToys', toys })
       toyService.query().then((toys) => {
         commit({ type: 'setToys', toys })
       })
     },
-    removeToy({ commit }, { id }) {
-      // commit({ type: 'removeToy', id })
-      toyService.remove(id).then(() => {
-        commit({ type: 'removeToy', id })
+    removeToy({ commit }, { toyId }) {
+      toyService.remove(toyId).then(() => {
+        commit({ type: 'removeToy', toyId })
       })
     },
-    getToyById(context, { id }) {
-      // const toys = context.getters.toysForDisplay
-      // return toys.find(toy => toy._id === id)
-      toyService.getById(id).then(toy => JSON.parse(JSON.stringify(toy)))
+    getToyById(context, { toyId }) {
+      return toyService.getById(toyId).then(toy => JSON.parse(JSON.stringify(toy)))
     },
     updateToy({ commit }, { toy }) {
-      // const toys = context.getters.toysForDisplay
-      // const currIdx = toys.findIndex(toy => toy._id === id)
-      // return JSON.parse(JSON.stringify(currToy))
-
       const newToy = JSON.parse(JSON.stringify(toy))
       toyService.save(newToy).then((savedToy) => {
         commit({ type: 'saveToy', savedToy })

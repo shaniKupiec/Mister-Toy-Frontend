@@ -3,7 +3,7 @@ import home from '../views/home.vue'
 import about from '../views/about.vue'
 import toyApp from '../views/toy-app.vue'
 import toyDetails from '../views/toy-details.vue'
-// import toyEdit from '../views/toy-edit.vue'
+import toyEdit from '../views/toy-edit.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -24,15 +24,15 @@ const router = createRouter({
       component: toyApp
     },
     {
-      path: '/toy/:id',
+      path: '/toy/:toyId',
       name: 'toy-details',
       component: toyDetails
     },
-    // {
-    //   path: '/toy/edit/:id?',
-    //   name: 'edit',
-    //   component: toyEdit
-    // },
+    {
+      path: '/toy/edit/:toyId?',
+      name: 'edit',
+      component: toyEdit
+    },
   ]
 })
 

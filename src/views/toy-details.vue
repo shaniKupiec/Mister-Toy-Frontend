@@ -43,15 +43,13 @@
     <ul>
       <li v-for="label in toy.labels" :key="label">{{ label }}</li>
     </ul>
-    <span> price: {{ toy.price }} </span>
-    <span> {{ formatedTime }} </span>
-    <span> {{ inStock }} </span>
+    <div> price: {{ toy.price }} </div>
+    <div> {{ formatedTime }} </div>
+    <div> {{ inStock }} </div>
     <div>
       <router-link to="/toy">Back</router-link>
-    </div>
-    <div>
       <router-link to="/toy">
-        <button @click="removeToy">X</button>
+        <button @click="removeToy">Remove</button>
       </router-link>
     </div>
   </section>
@@ -71,17 +69,15 @@ export default {
   },
   methods: {
     loadToy() {
-      this.toy = this.$store.dispatch({ type: 'getToyById', toyId: this.$route.params.toyId })
-      // this.toy = {
-      //   _id: 't101',
-      //   name: 'Talking Doll',
-      //   price: 123,
-      //   labels: ['Doll', 'Battery Powered', 'Baby'],
-      //   createdAt: 1631031801011,
-      //   inStock: true,
-      // }
-      // const prm = this.$store.dispatch({ type: 'getToyById', toyId: this.$route.params.toyId })
-      // prm.then((toy) => (this.toy = toy))
+      this.$store
+        .dispatch({
+          type: 'getToyById',
+          toyId: this.$route.params.toyId,
+        })
+        .then((toy) => {
+          this.toy = toy
+          console.log(toy, 'toy')
+        })
     },
     removeToy() {
       this.$store.dispatch({
@@ -101,7 +97,7 @@ export default {
   },
   watch: {
     '$route.params.toyId'() {
-      this.loadTodo()
+      if(this.$route.params.toyId) this.loadTodo()
     },
   },
 }

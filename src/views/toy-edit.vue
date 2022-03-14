@@ -57,11 +57,11 @@
 } -->
 
 <template>
-  <section>
-    <input type="text" v-model="toy.name" />
+  <section v-if="toy">
+    <input type="text" v-model="toy.name" title="toy name"/>
     <!-- add focuse -->
     <input type="number" min="1" v-model="toy.price" title="price" />
-    <input type="color" v-model="toy.color" />
+    <!-- <input type="color" v-model="toy.color" /> -->
 
     <input type="checkbox" id="stock" @change="toy.inStock = !toy.inStock" :checked="toy.inStock" />
     <label for="stock">in stock</label>
@@ -81,9 +81,6 @@
 
 export default {
   name: 'toy-edit',
-  //  props: {
-  //    car: Object,
-  //  },
   created() {
     this.loadToy()
   },
@@ -94,17 +91,15 @@ export default {
   },
   methods: {
     loadToy() {
-      this.toy = this.$store.dispatch({ type: 'getToyById', toyId: this.$route.params.toyId })
-      // this.toy = {
-      //   _id: 't101',
-      //   name: 'Talking Doll',
-      //   price: 123,
-      //   labels: ['Doll', 'Battery Powered', 'Baby'],
-      //   createdAt: 1631031801011,
-      //   inStock: true,
-      // }
-      // const prm = this.$store.dispatch({ type: 'getToyById', toyId: this.$route.params.toyId })
-      // prm.then((toy) => (this.toy = toy))
+      this.$store
+        .dispatch({
+          type: 'getToyById',
+          toyId: this.$route.params.toyId,
+        })
+        .then((toy) => {
+          this.toy = toy
+          console.log(toy, 'toy')
+        })
     },
     update() {
       this.$store.dispatch({
