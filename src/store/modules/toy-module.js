@@ -3,6 +3,14 @@
 export default {
   state: {
     toys: null,
+    toy: {
+      _id: 't101',
+      name: 'Talking Doll',
+      price: 123,
+      labels: ['Doll', 'Battery Powered', 'Baby'],
+      createdAt: 1631031801011,
+      inStock: true,
+    },
   },
   getters: {
     toys(state) {
