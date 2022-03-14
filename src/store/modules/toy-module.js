@@ -1,16 +1,8 @@
-// import { carService } from '../../services/car-service'
+import { toyService } from '../../services/toy.service'
 
 export default {
   state: {
     toys: null,
-    // toy: {
-    //   _id: 't101',
-    //   name: 'Talking Doll',
-    //   price: 123,
-    //   labels: ['Doll', 'Battery Powered', 'Baby'],
-    //   createdAt: 1631031801011,
-    //   inStock: true,
-    // },
   },
   getters: {
     toysForDisplay(state) {
@@ -25,11 +17,11 @@ export default {
       const idx = state.toys.findIndex((toy) => toy.id === id)
       state.toys.splice(idx, 1)
     },
-    // saveCar(state, { car }) {
-    //   const idx = state.cars.findIndex((currCar) => currCar.id === car.id)
-    //   if (idx !== -1) state.cars.splice(idx, 1, car)
-    //   else state.cars.push(car)
-    // },
+    saveToy(state, { savedToy }) {
+      const idx = state.toys.findIndex((currToy) => currToy.id === savedToy.id)
+      if (idx !== -1) state.toys.splice(idx, 1, savedToy)
+      else state.toys.push(savedToy)
+    },
   },
   actions: {
     loadToys({ commit }) {
@@ -68,27 +60,29 @@ export default {
         },
       ]
       commit({ type: 'setToys', toys })
-      // carService.query().then((cars) => {
-      //   commit({ type: 'setCars', cars })
+      // toyService.query().then((toys) => {
+      //   commit({ type: 'setToys', toys })
       // })
     },
     removeToy({ commit }, { id }) {
       commit({ type: 'removeToy', id })
-      // carService.remove(id).then(() => {
-      //   commit({ type: 'removeCar', id })
+      // toyService.remove(id).then(() => {
+      //   commit({ type: 'removeToy', id })
       // })
     },
-    getToyById(context, { id }) {
+    getToyById(context, { id }) { // add deep copy
       const toys = context.getters.toysForDisplay
       return toys.find(toy => toy._id === id)
-      // carService.remove(id).then(() => {
-      //   commit({ type: 'removeCar', id })
+      // toyService.getById(id)
+    },
+    updateToy(context, { toy }) { // add deep copy
+      const toys = context.getters.toysForDisplay
+      const currIdx = toys.findIndex(toy => toy._id === id)
+      return JSON.parse(JSON.stringify(currToy))
+
+      // toyService.save(toy).then((savedToy) => {
+      //   commit({ type: 'saveToy', savedToy })
       // })
     },
-    // saveCar({ commit }, { car }) {
-    //   carService.save(car).then((car) => {
-    //     commit({ type: 'saveCar', car })
-    //   })
-    // },
   },
 }

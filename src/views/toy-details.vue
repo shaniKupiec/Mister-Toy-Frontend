@@ -46,9 +46,13 @@
     <span> price: {{ toy.price }} </span>
     <span> {{ formatedTime }} </span>
     <span> {{ inStock }} </span>
-    <div><router-link to="/toy">Back</router-link></div>
     <div>
-      <router-link to="/toy"><button @click="removeToy">X</button></router-link>
+      <router-link to="/toy">Back</router-link>
+    </div>
+    <div>
+      <router-link to="/toy">
+        <button @click="removeToy">X</button>
+      </router-link>
     </div>
   </section>
 </template>
