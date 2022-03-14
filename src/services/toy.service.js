@@ -1,4 +1,7 @@
-const TOY_KEY = 'toys'
+import axios from 'axios'
+
+const URL = '//localhost:3030/api/toy'
+
 
 export const toyService = {
   query,
@@ -9,19 +12,19 @@ export const toyService = {
 }
 
 function query(filterBy) {
-  return axios.get(TOY_KEY, { params: filterBy }).then((res) => res.data)
+  return axios.get(URL, { params: filterBy }).then((res) => res.data)
 }
 
 function getById(id) {
-  return axios.get(TOY_KEY + id).then((res) => res.data)
+  return axios.get(URL + id).then((res) => res.data)
 }
 
 function save(toy) {
-  return toy._id ? axios.put(TOY_KEY + toy._id, toy) : axios.post(TOY_KEY, toy)
+  return toy._id ? axios.put(URL + toy._id, toy) : axios.post(URL, toy)
 }
 
 function remove(toyId) {
-  return axios.delete(TOY_KEY + toyId)
+  return axios.delete(URL + toyId)
 }
 
 // function getEmptyToy() {
