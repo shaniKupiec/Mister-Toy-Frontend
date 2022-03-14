@@ -1,31 +1,34 @@
 <template>
   <section>
     <div class="toy-preview">
-      <!-- <button @click="remove()">X</button> -->
-      <!-- <router-link :to="'/toy/edit/'+toy._id">Edit</router-link> -->
       <span> {{ toy.name }} </span>
       <span> price: {{ toy.price }} </span>
       <span> {{ formatedTime }} </span>
       <span> {{ inStock }} </span>
       <router-link :to="'/toy/' + toy._id">Details</router-link>
+      <router-link :to="'/toy/edit/'+toy._id">Edit</router-link>
+      <button @click="removeToy">X</button>
     </div>
   </section>
 </template>
 
 <script>
-// import appHeader from './components/app-header.vue'
-
 export default {
-  props: ['toy'],
+  name: 'toy-preview',
+  props: {
+    toy: {
+      type: Object,
+    },
+  },
   components: {},
   created() {},
   data() {
     return {}
   },
   methods: {
-    // remove() {
-    //   this.$emit('remove', this.todo._id)
-    // },
+    removeToy() {
+      this.$emit('removeToy', this.toy._id)
+    },
   },
   computed: {
     formatedTime() {

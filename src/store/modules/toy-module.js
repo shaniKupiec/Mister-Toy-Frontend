@@ -3,24 +3,24 @@
 export default {
   state: {
     toys: null,
-    toy: {
-      _id: 't101',
-      name: 'Talking Doll',
-      price: 123,
-      labels: ['Doll', 'Battery Powered', 'Baby'],
-      createdAt: 1631031801011,
-      inStock: true,
-    },
+    // toy: {
+    //   _id: 't101',
+    //   name: 'Talking Doll',
+    //   price: 123,
+    //   labels: ['Doll', 'Battery Powered', 'Baby'],
+    //   createdAt: 1631031801011,
+    //   inStock: true,
+    // },
   },
   getters: {
-    toys(state) {
+    toysForDisplay(state) {
       return state.toys
     },
   },
   mutations: {
-    // setCars(state, { cars }) {
-    //   state.cars = cars
-    // },
+    setToys(state, { toys }) {
+      state.toys = toys
+    },
     // removeCar(state, { id }) {
     //   const idx = state.cars.findIndex((car) => car.id === id)
     //   state.cars.splice(idx, 1)
@@ -32,11 +32,46 @@ export default {
     // },
   },
   actions: {
-    // loadCars({ commit }) {
-    //   carService.query().then((cars) => {
-    //     commit({ type: 'setCars', cars })
-    //   })
-    // },
+    loadToys({ commit }) {
+      const toys = [
+        {
+          _id: 't101',
+          name: 'Talking Doll1',
+          price: 123,
+          labels: ['Doll', 'Battery Powered', 'Baby'],
+          createdAt: 1631031801011,
+          inStock: true,
+        },
+        {
+          _id: 'sdfbg',
+          name: 'Talking Doll2',
+          price: 1000,
+          labels: ['Doll', 'Battery Powered', 'Baby'],
+          createdAt: 1631031801011,
+          inStock: true,
+        },
+        {
+          _id: 'kl2345',
+          name: 'Talking Doll3',
+          price: 7,
+          labels: ['Doll', 'Battery Powered', 'Baby'],
+          createdAt: 1631031801011,
+          inStock: true,
+        },
+        {
+          _id: 'vbnm',
+          name: 'Talking Doll4',
+          price: 5,
+          labels: ['Doll', 'Battery Powered', 'Baby'],
+          createdAt: 1631031801011,
+          inStock: true,
+        },
+      ]
+      commit({ type: 'setToys', toys })
+      // carService.query().then((cars) => {
+      //   commit({ type: 'setCars', cars })
+      // })
+    },
     // removeCar({ commit }, { id }) {
     //   carService.remove(id).then(() => {
     //     commit({ type: 'removeCar', id })
