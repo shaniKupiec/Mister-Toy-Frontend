@@ -1,0 +1,36 @@
+/* flex */
+
+.flex {
+    display: flex;
+}
+
+.flex.justify-between {
+    justify-content: space-between;
+}
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.items-center {
+    align-items: center;
+}
+
+
+/* list */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* OTHERS */
+
+.uppercase{
+    text-transform: uppercase
+}
+
+.m-r-5{
+    margin-right: 5px;
+}
