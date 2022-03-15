@@ -9,6 +9,7 @@
         <router-link class="link" to="/toy">Toys</router-link>
         <router-link class="link" to="/about">About</router-link>
         <router-link class="link" to="/dashboard">Dashboard</router-link>
+        <router-link class="link" to="/shop">Our Shops</router-link>
       </nav>
     </section>
   </header>
