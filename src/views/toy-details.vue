@@ -33,11 +33,11 @@ export default {
     }
   },
   created() {
-    const { id } = this.$route.params
+    const { toyId } = this.$route.params
     this.$store
         .dispatch({
           type: 'getToyById',
-          toyId: id,
+          toyId,
         }).then((toy) => {
           this.toy = toy
         })
@@ -52,7 +52,7 @@ export default {
         .then(() => this.goBack())
     },
     goBack() {
-      this.$router.push('/')
+      this.$router.push('/toy')
     },
   },
   computed: {

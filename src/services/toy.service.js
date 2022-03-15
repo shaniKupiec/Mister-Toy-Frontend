@@ -11,7 +11,6 @@ export const toyService = {
 }
 
 function query(filterBy) {
-  filterBy = JSON.parse(JSON.stringify(filterBy))
   return axios.get(URL, { params: filterBy }).then((res) => res.data)
 }
 

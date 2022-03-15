@@ -21,7 +21,7 @@ export default {
     saveToy(state, { savedToy }) {
       const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
       if (idx !== -1) state.toys.splice(idx, 1, savedToy)
-      else state.toys.push(savedToy)
+      else state.toys.unshift(savedToy)
     },
     setFilter(state, { filterBy }) {
       state.filterBy = filterBy
@@ -29,27 +29,52 @@ export default {
   },
   actions: {
     loadToys({ commit, state }) {
-      toyService.query(state.filterBy).then((toys) => {
-        commit({ type: 'setToys', toys })
-      })
+      commit({ type: 'setIsLoading', isLoading: true })
+      toyService
+        .query(state.filterBy)
+        .then((toys) => {
+          commit({ type: 'setToys', toys })
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+        .finally(() => {
+          commit({ type: 'setIsLoading', isLoading: false })
+        })
     },
     removeToy({ commit }, { toyId }) {
-      toyService.remove(toyId).then(() => {
-        commit({ type: 'removeToy', toyId })
-      })
+      toyService
+        .remove(toyId)
+        .then(() => {
+          commit({ type: 'removeToy', toyId })
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
     },
     getToyById(context, { toyId }) {
-      return toyService.getById(toyId).then((toy) => JSON.parse(JSON.stringify(toy)))
+      return toyService
+        .getById(toyId)
+        .then((toy) => JSON.parse(JSON.stringify(toy)))
+        .catch((err) => {
+          console.log('err', err)
+        })
     },
-    updateToy({ commit }, { toy }) {
+    saveToy({ commit }, { toy }) {
       const newToy = JSON.parse(JSON.stringify(toy))
-      toyService.save(newToy).then((savedToy) => {
-        commit({ type: 'saveToy', savedToy })
-      })
+      toyService
+        .save(newToy)
+        .then((savedToy) => {
+          commit({ type: 'saveToy', savedToy })
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
     },
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy })
       dispatch({ type: 'loadToys' })
+      console.log(filterBy, 'filterBy')
     },
   },
 }

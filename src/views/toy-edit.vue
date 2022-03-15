@@ -8,7 +8,7 @@
 
     <!-- lables -->
 
-    <button @click="update">SAVE</button>
+    <button @click="save">SAVE</button>
   </section>
   <button @click="goBack">Back</button>
 </template>
@@ -19,11 +19,11 @@ import { toyService } from '../services/toy.service.js'
 export default {
   name: 'toy-edit',
   created() {
-    const { id } = this.$route.params
-    if (id) {
+    const { toyId } = this.$route.params
+    if (toyId) {
       this.$store.dispatch({
           type: 'getToyById',
-          toyId: id,
+          toyId,
         }).then((toy) => {
           this.toyToEdit = toy
         })
@@ -36,16 +36,16 @@ export default {
     }
   },
   methods: {
-    update() {
+    save() {
       this.$store
         .dispatch({
-          type: 'updateToy',
+          type: 'saveToy',
           toy: this.toyToEdit,
         })
         .then(() => this.goBack())
     },
     goBack() {
-      this.$router.push('/')
+      this.$router.push('/toy')
     },
   },
 }

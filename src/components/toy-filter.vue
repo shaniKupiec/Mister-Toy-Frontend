@@ -1,5 +1,6 @@
 <template>
-  <section>
+  <section class="flex gap-2">
+    filter:
     <input type="text" v-model="filterBy.name" ref="txtInput" @input="setFilter" placeholder="Search...." />
 
     <label>
@@ -19,6 +20,12 @@
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock </label>
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="outOfStock" hidden /> Out Of Stock </label>
   </section>
+  <section class="flex gap-2">
+    sort:
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="name" hidden /> Name </label>
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="price" hidden /> Price </label>
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="createdAt" hidden /> Time </label>
+    </section>
 </template>
 
 <script>
@@ -30,12 +37,13 @@ export default {
         name: '',
         labels: [],
         stock: 'all',
+        sortBy: '',
       },
     }
   },
   methods: {
     setFilter() {
-      this.$emit('setFilter', this.filterBy)
+      this.$emit('setFilter', JSON.parse(JSON.stringify(this.filterBy)))
     },
   },
   created() {},

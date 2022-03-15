@@ -1,9 +1,9 @@
 <template>
   <section class="main-layout">
     <toy-filter @setFilter="setFilter" />
-    <!-- add -->
+    <button @click="addNew">Add New Toy</button>
     <toy-list :toys="toys" @removeToy="removeToy" />
-    <!-- <p v-if="isLoading">Loading...</p> -->
+    <p v-if="isLoading">Loading...</p>
   </section>
 </template>
 
@@ -25,12 +25,9 @@ export default {
     setFilter(filterBy) {
       this.$store.dispatch({ type: 'filter', filterBy })
     },
-    // add(todo) {
-    //   this.$store.dispatch({
-    //     type: 'addTodo',
-    //     todo,
-    //   })
-    // },
+    addNew() {
+      this.$router.push('/toy/edit')
+    },
     removeToy(toyId) {
       console.log('removing', toyId)
       this.$store.dispatch({
@@ -43,9 +40,9 @@ export default {
     toys() {
       return this.$store.getters.toysForDisplay
     },
-    // isLoading() {
-    //   return this.$store.getters.isLoading
-    // },
+    isLoading() {
+      return this.$store.getters.isLoading
+    },
   },
   unmounted() {},
 }
