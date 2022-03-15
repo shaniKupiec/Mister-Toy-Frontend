@@ -7,14 +7,14 @@
     <label for="stock">in stock</label>
 
     <!-- lables -->
-
-    <button @click="save">SAVE</button>
+    <el-button type="success" @click="save" :icon="Check" circle title="Save"/>
   </section>
-  <button @click="goBack">Back</button>
+  <el-button type="info" @click="goBack" round>Back</el-button>
 </template>
 
 <script>
 import { toyService } from '../services/toy.service.js'
+import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 
 export default {
   name: 'toy-edit',
@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       toyToEdit: null,
+      Check,
     }
   },
   methods: {

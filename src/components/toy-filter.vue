@@ -3,18 +3,9 @@
     filter:
     <input type="text" v-model="filterBy.name" ref="txtInput" @input="setFilter" placeholder="Search...." />
 
-    <label>
-      Labels:
-      <select @change="setFilter" multiple v-model="filterBy.labels">
-        <option value="On wheels">On wheels</option>
-        <option value="Box game">Box game</option>
-        <option value="Art">Art</option>
-        <option value="Baby">Baby</option>
-        <option value="Doll">Doll</option>
-        <option value="Puzzle">Puzzle</option>
-        <option value="Outdoor">Outdoor</option>
-      </select>
-    </label>
+    <el-select v-model="filterBy.labels" multiple @change="setFilter" placeholder="Select" style="width: 240px">
+      <el-option v-for="item in options" :key="item" :label="item" :value="item" />
+    </el-select>
 
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="all" hidden /> All </label>
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock </label>
@@ -25,7 +16,7 @@
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="name" hidden /> Name </label>
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="price" hidden /> Price </label>
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="createdAt" hidden /> Time </label>
-    </section>
+  </section>
 </template>
 
 <script>
@@ -39,6 +30,7 @@ export default {
         stock: 'all',
         sortBy: '',
       },
+      options: ['Doll', 'Battery Powered', 'Baby', 'Puzzle', 'Video Game'],
     }
   },
   methods: {

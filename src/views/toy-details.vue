@@ -17,19 +17,22 @@
       </li>
     </ul>
     <div>
-      <button @click="goBack">Back</button>
-      <button @click="removeToy">Remove</button>
+      <el-button type="info" @click="goBack" round>Back</el-button>
+      <el-button type="danger" :icon="Delete" circle @click="removeToy" title="Delete"/>
     </div>
   </section>
 </template>
 
 <script>
+import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
+
 export default {
   name: 'toy-details',
   components: {},
   data() {
     return {
       toy: null,
+      Delete,
     }
   },
   created() {
