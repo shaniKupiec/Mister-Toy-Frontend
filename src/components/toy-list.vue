@@ -1,5 +1,5 @@
 <template>
-  <ul class="clean-list">
+  <ul class="clean-list flex flex-wrap">
     <toy-preview v-for="toy in toys" :key="toy._id" :toy="toy" @removeToy="removeToy" />
   </ul>
 </template>

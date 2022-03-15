@@ -16,6 +16,13 @@
     align-items: center;
 }
 
+.flex.flex-col {
+    flex-direction: column;
+}
+
+.flex.flex-wrap {
+    flex-wrap: wrap;
+}
 
 /* list */
 

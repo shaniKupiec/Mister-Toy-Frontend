@@ -1,18 +1,23 @@
 <template>
-  <section>
-    <div class="toy-preview flex gap-2">
-      <span> {{ toy.name }} </span>
-      <span> price: {{ toy.price }} </span>
-      <span> {{ formatedTime }} </span>
-      <span> {{ inStock }} </span>
+  <custom-card>
+    <template v-slot:header>
+      <h1>{{ toy.name }}</h1>
+    </template>
+
+    <div> {{ formattedPrice }} </div>
+    <div v-if="!toy.inStock"> Out Of Stock! </div>
+
+    <template v-slot:footer>
       <router-link :to="'/toy/' + toy._id">Details</router-link>
       <router-link :to="'/toy/edit/' + toy._id">Edit</router-link>
-      <button @click="removeToy">X</button>
-    </div>
-  </section>
+      <button @click="removeToy">Delete</button>
+    </template>
+  </custom-card>
 </template>
 
 <script>
+import customCard from '../components/custom-card.vue'
+
 export default {
   name: 'toy-preview',
   props: {
@@ -20,7 +25,9 @@ export default {
       type: Object,
     },
   },
-  components: {},
+  components: {
+    customCard,
+  },
   created() {},
   data() {
     return {}
@@ -31,12 +38,8 @@ export default {
     },
   },
   computed: {
-    formatedTime() {
-      var createdAt = new Date(this.toy.createdAt)
-      return createdAt.toLocaleString()
-    },
-    inStock() {
-      return this.toy.inStock ? 'in stock' : 'out  of stock'
+    formattedPrice() {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol'}).format(this.toy.price)
     },
   },
   unmounted() {},

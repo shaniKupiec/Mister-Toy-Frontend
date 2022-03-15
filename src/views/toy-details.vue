@@ -1,42 +1,3 @@
-<!-- export default {
-  template: `
-        <section v-if="todo" :style="{backgroundColor: todo.color}">
-          <div>{{todo.txt}}</div>
-          <div>importance : {{todo.importance}}</div>
-          <div></div>
-          <div v-if="todo.doneAt">Done At : {{formatedTime}}</div>
-          <div><router-link to="/todo-app">Back</router-link></div>
-        </section>
-        <section v-else>Loading...</section>
-    `,
-  components: {},
-  data() {
-    return {
-      todo: null,
-    }
-  },
-  created() {
-    this.loadTodo()
-  },
-  methods: {
-    loadTodo() {
-      const prm = this.$store.dispatch({ type: 'getTodoById', todoId: this.$route.params.todoId })
-      prm.then((todo) => (this.todo = todo))
-    },
-  },
-  computed: {
-    formatedTime() {
-      var doneTime = new Date(this.todo.doneAt)
-      return doneTime.toLocaleString()
-    },
-  },
-  watch: {
-    '$route.params.todoId'() {
-      this.loadTodo()
-    },
-  },
-} -->
-
 <template>
   <section v-if="toy">
     <span> {{ toy.name }} </span>
@@ -44,8 +5,8 @@
       labels:
       <li v-for="label in toy.labels" :key="label">{{ label }}</li>
     </ul>
-    <div>price: {{ toy.price }}</div>
-    <div>{{ formatedTime }}</div>
+    <div>{{ formattedPrice }}</div>
+    <div>{{ formattedTime }}</div>
     <div>{{ inStock }}</div>
     <ul v-if="toy.reviews.length" class="clean-list">
       reviews:
@@ -56,10 +17,8 @@
       </li>
     </ul>
     <div>
-      <router-link to="/toy">Back</router-link>
-      <router-link to="/toy">
-        <button @click="removeToy">Remove</button>
-      </router-link>
+      <button @click="goBack">Back</button>
+      <button @click="removeToy">Remove</button>
     </div>
   </section>
 </template>
@@ -74,40 +33,44 @@ export default {
     }
   },
   created() {
-    this.loadToy()
-  },
-  methods: {
-    loadToy() {
-      this.$store
+    const { id } = this.$route.params
+    this.$store
         .dispatch({
           type: 'getToyById',
-          toyId: this.$route.params.toyId,
-        })
-        .then((toy) => {
+          toyId: id,
+        }).then((toy) => {
           this.toy = toy
-          console.log(toy, 'toy')
         })
-    },
+  },
+  methods: {
     removeToy() {
-      this.$store.dispatch({
-        type: 'removeToy',
-        toyId: this.toy._id,
-      })
+      this.$store
+        .dispatch({
+          type: 'removeToy',
+          toyId: this.toy._id,
+        })
+        .then(() => this.goBack())
+    },
+    goBack() {
+      this.$router.push('/')
     },
   },
   computed: {
-    formatedTime() {
+    formattedTime() {
       var createdAt = new Date(this.toy.createdAt)
       return createdAt.toLocaleString()
+    },
+    formattedPrice() {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(this.toy.price)
     },
     inStock() {
       return this.toy.inStock ? 'in stock' : 'out  of stock'
     },
   },
-  watch: {
-    '$route.params.toyId'() {
-      if (this.$route.params.toyId) this.loadTodo()
-    },
-  },
+  // watch: {
+  //   '$route.params.toyId'() {
+  //     if (this.$route.params.toyId) this.loadTodo()
+  //   },
+  // },
 }
 </script>

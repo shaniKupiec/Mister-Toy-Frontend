@@ -3,6 +3,7 @@ import { toyService } from '../../services/toy.service'
 export default {
   state: {
     toys: null,
+    filterBy: null,
   },
   getters: {
     toysForDisplay(state) {
@@ -19,17 +20,16 @@ export default {
     },
     saveToy(state, { savedToy }) {
       const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
-      console.log('m- saved toy', savedToy)
-      console.log('m- idx', idx)
       if (idx !== -1) state.toys.splice(idx, 1, savedToy)
       else state.toys.push(savedToy)
     },
+    setFilter(state, { filterBy }) {
+      state.filterBy = filterBy
+    },
   },
   actions: {
-    loadToys({ commit }, { filterBy }) {
-      console.log('lodaing', filterBy);
-      toyService.query(filterBy).then((toys) => {
-        console.log('toys for display', toys);
+    loadToys({ commit, state }) {
+      toyService.query(state.filterBy).then((toys) => {
         commit({ type: 'setToys', toys })
       })
     },
@@ -46,6 +46,10 @@ export default {
       toyService.save(newToy).then((savedToy) => {
         commit({ type: 'saveToy', savedToy })
       })
+    },
+    filter({ commit, dispatch }, { filterBy }) {
+      commit({ type: 'setFilter', filterBy })
+      dispatch({ type: 'loadToys' })
     },
   },
 }

@@ -24,9 +24,7 @@
 .footer-container {
     background-color: var(--clrGreen1);
     height: 75px;
-    position: absolute;
     bottom: 0;
-    width: 100vw;
 }
 
 .main-footer{

@@ -1,65 +1,51 @@
 <template>
-  <section v-if="toy">
-    <input type="text" v-model="toy.name" title="toy name"/>
-    <!-- add focuse -->
-    <input type="number" min="1" v-model="toy.price" title="price" />
-    <!-- <input type="color" v-model="toy.color" /> -->
+  <section v-if="toyToEdit">
+    <input type="text" v-model="toyToEdit.name" title="toy name" />
+    <input type="number" min="1" v-model="toyToEdit.price" title="price" />
 
-    <input type="checkbox" id="stock" @change="toy.inStock = !toy.inStock" :checked="toy.inStock" />
+    <input type="checkbox" id="stock" @change="toyToEdit.inStock = !toyToEdit.inStock" :checked="toyToEdit.inStock" />
     <label for="stock">in stock</label>
 
-    <router-link to="/toy">
-      <button @click="update">SAVE</button>
-    </router-link>
+    <!-- lables -->
+
+    <button @click="update">SAVE</button>
   </section>
-  <section>
-    <router-link to="/toy">Back</router-link>
-    <!-- <router-link to="/toy" @click="remove()">Delete</router-link> -->
-  </section>
+  <button @click="goBack">Back</button>
 </template>
 
 <script>
-// import appHeader from './components/app-header.vue'
+import { toyService } from '../services/toy.service.js'
 
 export default {
   name: 'toy-edit',
   created() {
-    this.loadToy()
+    const { id } = this.$route.params
+    if (id) {
+      this.$store.dispatch({
+          type: 'getToyById',
+          toyId: id,
+        }).then((toy) => {
+          this.toyToEdit = toy
+        })
+    } else this.toyToEdit = toyService.getEmptyToy()
   },
+  components: {},
   data() {
     return {
-      toy: null,
+      toyToEdit: null,
     }
   },
   methods: {
-    loadToy() {
+    update() {
       this.$store
         .dispatch({
-          type: 'getToyById',
-          toyId: this.$route.params.toyId,
+          type: 'updateToy',
+          toy: this.toyToEdit,
         })
-        .then((toy) => {
-          this.toy = toy
-          console.log(toy, 'toy')
-        })
+        .then(() => this.goBack())
     },
-    update() {
-      this.$store.dispatch({
-        type: 'updateToy',
-        toy: this.toy,
-      })
-    },
-    // remove() {
-    //   const toyId = this.toy._id
-    //   this.$store.dispatch({
-    //     type: 'removetoy',
-    //     toyId,
-    //   })
-    // },
-  },
-  watch: {
-    '$route.params.toyId'() {
-      this.loadToy()
+    goBack() {
+      this.$router.push('/')
     },
   },
 }

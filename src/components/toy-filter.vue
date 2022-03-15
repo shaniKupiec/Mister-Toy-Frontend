@@ -1,55 +1,23 @@
-<!-- export default {
-  template: `
-    <section class="cmp">
-        <label> Search a todo: </label>    
-        <input 
-            v-model="filterBy.txt" 
-            ref="txtInput" 
-            type="text" 
-            @input="setFilter" 
-            placeholder="Search....">
-    </section>
-    `,
-  data() {
-    return {
-      filterBy: {
-        txt: null,
-      },
-    }
-  },
-  methods: {
-    setFilter() {
-      this.$emit('filter', this.filterBy)
-    },
-  },
-  created() {},
-  mounted() {
-    this.$refs.txtInput.focus()
-  },
-  emits: ['filter'],
-} -->
-
 <template>
   <section>
-    <input type="text" v-model="filterBy.txt" ref="txtInput" @input="setFilter" placeholder="Search...." />
-    <select v-model="filterBy.label" @change="setFilter">
-      <option>All</option>
-      <option>Doll</option>
-      <!-- <option value="saab">Battery Powered</option> -->
-      <option>Battery Powered</option>
-      <option>Baby</option>
-      <option>Puzzle</option>
-      <option>Video Game</option>
-    </select>
-    <label class="cursor-pointer">
-      <input type="radio" v-model="filterBy.stock" @change="setFilter" value="all" hidden /> All
+    <input type="text" v-model="filterBy.name" ref="txtInput" @input="setFilter" placeholder="Search...." />
+
+    <label>
+      Labels:
+      <select @change="setFilter" multiple v-model="filterBy.labels">
+        <option value="On wheels">On wheels</option>
+        <option value="Box game">Box game</option>
+        <option value="Art">Art</option>
+        <option value="Baby">Baby</option>
+        <option value="Doll">Doll</option>
+        <option value="Puzzle">Puzzle</option>
+        <option value="Outdoor">Outdoor</option>
+      </select>
     </label>
-    <label class="cursor-pointer">
-      <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock
-    </label>
-    <label class="cursor-pointer">
-      <input type="radio" v-model="filterBy.stock" @change="setFilter" value="outOfStock" hidden /> Out Of Stock
-    </label>
+
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="all" hidden /> All </label>
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock </label>
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="outOfStock" hidden /> Out Of Stock </label>
   </section>
 </template>
 
@@ -59,9 +27,9 @@ export default {
   data() {
     return {
       filterBy: {
-        txt: null,
-        label: 'All',
-        stock: 'all'
+        name: '',
+        labels: [],
+        stock: 'all',
       },
     }
   },
