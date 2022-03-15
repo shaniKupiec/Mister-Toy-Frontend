@@ -1,5 +1,5 @@
 <template>
-  <section class="flex gap-2">
+  <section class="flex gap-2 justify-center items-center">
     filter:
     <input type="text" v-model="filterBy.name" ref="txtInput" @input="setFilter" placeholder="Search...." />
 
@@ -7,11 +7,11 @@
       <el-option v-for="item in options" :key="item" :label="item" :value="item" />
     </el-select>
 
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="all" hidden /> All </label>
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock </label>
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="all" hidden /> All |</label>
+    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock |</label>
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="outOfStock" hidden /> Out Of Stock </label>
   </section>
-  <section class="flex gap-2">
+  <section class="flex gap-2 items-center">
     sort:
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="name" hidden /> Name </label>
     <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="price" hidden /> Price </label>

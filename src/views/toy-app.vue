@@ -1,7 +1,7 @@
 <template>
   <section class="main-layout">
     <toy-filter @setFilter="setFilter" />
-    <button @click="addNew">Add New Toy</button>
+    <el-button  @click="addNew" round>Add New Toy</el-button>
     <toy-list :toys="toys" @removeToy="removeToy" />
     <el-button v-if="isLoading" type="primary" loading class="loading">Loading</el-button>
   </section>

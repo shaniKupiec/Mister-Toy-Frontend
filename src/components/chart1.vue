@@ -1,7 +1,6 @@
 <template>
+  <h1 class="text-center">Average prices per toy type</h1>
   <DoughnutChart :chartData="testData" />
-
-  <!-- <pre>{{ res }}</pre> -->
 </template>
 
 <script>
@@ -11,7 +10,7 @@ import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
 
 export default {
-  name: 'dashboard',
+  name: 'chart1',
   components: {
     DoughnutChart,
   },
@@ -20,7 +19,6 @@ export default {
   },
   data() {
     return {
-    //   res: null,
       testData: {
         labels: [],
         datasets: [
@@ -48,7 +46,6 @@ export default {
         })
         return acc
       }, {})
-    //   this.res = res
       for (const label in res) {
         this.testData.labels.push(label)
         this.testData.datasets[0].data.push(res[label].total / res[label].amount)
