@@ -2,6 +2,7 @@
   <section class="main-toy-app">
     <toy-filter @setFilter="setFilter" />
     <el-button @click="addNew" round class="addBtn">Add New Toy</el-button>
+    <carousel />
     <toy-list :toys="toys" @removeToy="removeToy" />
     <el-button v-if="isLoading" type="primary" loading class="loading">Loading</el-button>
   </section>
@@ -10,12 +11,14 @@
 <script>
 import toyList from '../components/toy-list.vue'
 import toyFilter from '../components/toy-filter.vue'
+import carousel from '../components/carousel.vue'
 
 export default {
   name: 'toy-app',
   components: {
     toyList,
     toyFilter,
+    carousel,
   },
   created() {},
   data() {

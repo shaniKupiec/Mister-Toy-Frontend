@@ -9,26 +9,32 @@
     <div>{{ formattedTime }}</div>
     <div>{{ inStock }}</div>
     <ul v-if="toy.reviews.length" class="clean-list">
-      reviews:
+      <!-- reviews:
       <li v-for="review in toy.reviews" :key="review">
         <span>{{ review.creator }}</span>
         <span>{{ review.txt }}</span>
         <span>{{ review.createdAt }}</span>
+      </li> -->
+      <li v-for="review in toy.reviews" :key="review">
+        <toy-review :review="review" />
       </li>
     </ul>
     <div>
       <el-button type="info" @click="goBack" round>Back</el-button>
-      <el-button type="danger" :icon="Delete" circle @click="removeToy" title="Delete"/>
+      <el-button type="danger" :icon="Delete" circle @click="removeToy" title="Delete" />
     </div>
   </section>
 </template>
 
 <script>
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
+import toyReview from '../components/toy-review.vue'
 
 export default {
   name: 'toy-details',
-  components: {},
+  components: {
+    toyReview,
+  },
   data() {
     return {
       toy: null,
@@ -38,12 +44,13 @@ export default {
   created() {
     const { toyId } = this.$route.params
     this.$store
-        .dispatch({
-          type: 'getToyById',
-          toyId,
-        }).then((toy) => {
-          this.toy = toy
-        })
+      .dispatch({
+        type: 'getToyById',
+        toyId,
+      })
+      .then((toy) => {
+        this.toy = toy
+      })
   },
   methods: {
     removeToy() {

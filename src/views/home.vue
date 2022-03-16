@@ -1,6 +1,6 @@
 <template>
   <section>
-    HOME
+    <img src="src/assets/images/pixar.png" alt="">
   </section>
 </template>
 

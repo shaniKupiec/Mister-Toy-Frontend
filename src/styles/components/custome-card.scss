@@ -3,6 +3,7 @@
     border-radius: 5px;
     width: 250px;
     padding: 10px;
+    background-color: lighten($clr3, 5%);
     &:hover{
         transform: scale(1.07);
     }
