@@ -1,39 +1,39 @@
 <template>
-  <section v-if="toy">
-    <span> {{ toy.name }} </span>
-    <ul v-if="toy.labels.length" class="clean-list">
-      labels:
-      <li v-for="label in toy.labels" :key="label">{{ label }}</li>
-    </ul>
-    <div>{{ formattedPrice }}</div>
-    <div>{{ formattedTime }}</div>
-    <div>{{ inStock }}</div>
+  <custom-card v-if="toy" class="toy-details">
+    <template v-slot:header>
+      <span> {{ toy.name }} </span>
+      <div>{{ formattedPrice }}</div>
+    </template>
+
+    <div v-if="!toy.inStock" class="stock-sticker uppercase round">out of stock</div>
     <ul v-if="toy.reviews.length" class="clean-list">
-      <!-- reviews:
-      <li v-for="review in toy.reviews" :key="review">
-        <span>{{ review.creator }}</span>
-        <span>{{ review.txt }}</span>
-        <span>{{ review.createdAt }}</span>
-      </li> -->
       <li v-for="review in toy.reviews" :key="review">
         <toy-review :review="review" />
       </li>
     </ul>
-    <div>
+
+    <section class="grey">
+      <div v-if="toy.labels.length">Labled as: {{ toy.labels.join(', ') }}</div>
+      <div>on sale since {{ formattedTime }}</div>
+    </section>
+
+    <template v-slot:footer>
       <el-button type="info" @click="goBack" round>Back</el-button>
       <el-button type="danger" :icon="Delete" circle @click="removeToy" title="Delete" />
-    </div>
-  </section>
+    </template>
+  </custom-card>
 </template>
 
 <script>
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 import toyReview from '../components/toy-review.vue'
+import customCard from '../components/custom-card.vue'
 
 export default {
   name: 'toy-details',
   components: {
     toyReview,
+    customCard,
   },
   data() {
     return {
@@ -73,9 +73,9 @@ export default {
     formattedPrice() {
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(this.toy.price)
     },
-    inStock() {
-      return this.toy.inStock ? 'in stock' : 'out  of stock'
-    },
+    // inStock() {
+    //   return this.toy.inStock ? 'in stock' : 'out  of stock'
+    // },
   },
   // watch: {
   //   '$route.params.toyId'() {

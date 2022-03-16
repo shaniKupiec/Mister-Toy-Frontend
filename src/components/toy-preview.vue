@@ -1,12 +1,12 @@
 <template>
-  <custom-card>
+  <custom-card class="toy-preview">
     <template v-slot:header>
       <h1>{{ toy.name }}</h1>
     </template>
 
     <img :src="toy.img" alt="">
     <div>{{ formattedPrice }}</div>
-    <div v-if="!toy.inStock">Out Of Stock!</div>
+    <div v-if="!toy.inStock" class="stock-sticker uppercase round">out  of stock</div>
 
     <template v-slot:footer>
       <router-link :to="'/toy/' + toy._id">

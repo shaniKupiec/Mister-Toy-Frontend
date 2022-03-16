@@ -1,23 +1,22 @@
 <template>
-  <section class="flex">
-    <!-- <div class="img-container">
-      <img class="user-img" :src="'.././imgs/user_icon_' + review.idImg + '.png'" />
-    </div> -->
-    <div class="review-info flex flex-col">
+  <custom-card class="toy-review">
+    <template v-slot:header>
+      <img class="user-img" :src="'/src/assets/images/user_icon_' + review.idImg + '.png'" />
       <div class="writer-name">{{ review.creator }}</div>
-      <!-- <span>{{ '⭐'.repeat(review.rating) }}</span> -->
-      <span> {{ this.formattedTime }}</span>
-      <span> {{ review.txt }}</span>
-      <!-- <long-text :text="review.textarea" :length="30"></long-text> -->
-      <!-- <button @click="deleteR">X</button> -->
-    </div>
-  </section>
+    </template>
+
+    <span>{{ '⭐'.repeat(review.rating) }}</span>
+    <span> {{ this.formattedTime }}</span>
+
+    <template v-slot:footer>
+      <long-text :text="review.txt" :length="30"></long-text>
+    </template>
+  </custom-card>
 </template>
 
-// "creator": "shani", // "txt": "greate toy", // "createdAt": 1647278100453
-
 <script>
-// import longText from '../cmps/long-text.cmp.js'
+import longText from './long-text.vue'
+import customCard from '../components/custom-card.vue'
 
 export default {
   name: 'toy-review',
@@ -25,7 +24,8 @@ export default {
     review: Object,
   },
   components: {
-    // longText,
+    longText,
+    customCard,
   },
   created() {},
   data() {
@@ -53,4 +53,3 @@ export default {
   emits: ['remove-review'],
 }
 </script>
-

@@ -1,12 +1,9 @@
 .custom-card {
     padding: 1em;
     border-radius: 5px;
-    width: 250px;
-    padding: 10px;
-    background-color: lighten($clr3, 5%);
-    &:hover{
-        transform: scale(1.07);
-    }
+    box-shadow: 1px 1px 3px 0px lighten($clr0, 50%);
+    position: relative;
+
     header {
         font-size: 2rem;
     }
@@ -15,5 +12,41 @@
     }
     footer {
         font-size: 1rem;
+    }
+
+    &.toy-preview {
+        width: 250px;
+        background-color: lighten($clr3, 5%);
+        &:hover {
+            transform: scale(1.07);
+        }
+    }
+
+    &.toy-review {
+        background-color: lighten($clr1, 5%);
+        gap: 0;
+        padding: 0;
+        header {
+            display: flex;
+            img {
+                width: 3rem;
+            }
+        }
+    }
+
+    &.toy-details {
+
+        header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .grey{
+            color: lighten($clr0, 50%)
+        }
+
+        .long-text-link {
+            color: darken($clr3, 20%);
+        }
     }
 }

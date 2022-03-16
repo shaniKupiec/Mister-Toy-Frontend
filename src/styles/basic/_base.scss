@@ -19,7 +19,8 @@ html {
 
 body {
     margin: 0;
-    background-color: lighten($clr2, 5%);
+    background-color: $clr2;
+    // background-color: lighten($clr2, 1%);
 
     // @include for-normal-layout {
     //     &.sidebar-open {
@@ -35,7 +36,7 @@ h4,
 h5,
 h6,
 p {
-    margin: 0 0 1rem;
+    margin: 0;
 }
 
 img {
