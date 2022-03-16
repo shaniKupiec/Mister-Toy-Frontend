@@ -4,6 +4,7 @@
       <h1>{{ toy.name }}</h1>
     </template>
 
+    <img :src="toy.img" alt="">
     <div>{{ formattedPrice }}</div>
     <div v-if="!toy.inStock">Out Of Stock!</div>
 

@@ -11,23 +11,3 @@
     </footer>
   </article>
 </template>
-
-<style scoped>
-.custom-card {
-  padding: 1em;
-  border-radius: 5px;
-  width: 345px;
-}
-
-.custom-card header {
-  font-size: 2rem;
-}
-
-.custom-card main {
-  text-align: center;
-}
-
-.custom-card footer {
-  font-size: 1rem;
-}
-</style>

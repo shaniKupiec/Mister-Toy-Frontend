@@ -10,13 +10,6 @@
         grid-column: 1 / -1;
     }
 
-    // > *:not(.full) {
-        // display: grid;
-        // grid-auto-flow: dense;
-        // grid-template-columns: 1fr;
-        // grid-template-columns: repeat( 3, 1fr );
-    // }
-
     @include for-narrow-layout {
         @include layoutGTC($break-narrow);
     }

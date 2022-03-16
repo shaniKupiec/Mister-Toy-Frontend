@@ -1,10 +1,7 @@
 import axios from 'axios'
 
 function _getUrl(id = '') {
-  const BASE_URL =
-  process.env.NODE_ENV !== 'development'
-  ? '/api/toy'
-  : '//localhost:3030/api/toy'
+  const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/toy' : '//localhost:3030/api/toy'
   return `${BASE_URL}/${id}`
 }
 
@@ -23,8 +20,7 @@ function query(filterBy) {
 
 function getById(toyId) {
   // return axios.get(URL + toyId).then((res) =>  res.data)
-  return axios.get(_getUrl(toyId)).then((res) =>  res.data)
-
+  return axios.get(_getUrl(toyId)).then((res) => res.data)
 }
 
 function save(toy) {
@@ -37,7 +33,6 @@ function remove(toyId) {
   return axios.delete(_getUrl(toyId))
 }
 
-
 function getEmptyToy() {
   return {
     name: '',
@@ -45,5 +40,12 @@ function getEmptyToy() {
     labels: [],
     inStock: true,
     reviews: [],
+    img: `src/assets/images/${_getRandomInt(0, 11)}.png`,
   }
+}
+
+function _getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
