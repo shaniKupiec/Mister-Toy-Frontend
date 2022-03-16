@@ -29,7 +29,7 @@ function getById(toyId) {
 
 function save(toy) {
   // return toy._id ? axios.put(URL + toy._id, toy).then((res) => res.data) : axios.post(URL, toy).then((res) => res.data)
-  return toy._id ? axios.put(_getUrl(toy._id), toy).then((res) => res.data) : axios.post(URL, toy).then((res) => res.data)
+  return toy._id ? axios.put(_getUrl(toy._id), toy).then((res) => res.data) : axios.post(_getUrl(), toy).then((res) => res.data)
 }
 
 function remove(toyId) {

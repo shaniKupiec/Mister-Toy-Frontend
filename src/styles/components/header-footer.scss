@@ -1,0 +1,41 @@
+/* HEADER */
+
+.router-link-exact-active {
+    text-decoration: underline;
+    color: darken($clr3, 20%);
+    
+}
+
+.header-container{
+    height: 15vh;
+
+    .main-header {
+        height: 100%
+    }
+
+    .logo{
+        width: 5rem;
+        cursor: pointer;
+    }
+
+    nav a:hover{
+        transform: scale(1.07);
+    }
+}
+
+// MAIN
+
+.main-app{
+    min-height: 70vh;
+}
+
+/* FOOTER */
+
+.footer-container {
+    height: 15vh;
+    bottom: 0;
+
+    .main-footer{
+        height: 100%
+    }
+}

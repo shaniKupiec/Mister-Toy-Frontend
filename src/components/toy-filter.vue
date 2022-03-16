@@ -1,25 +1,33 @@
 <template>
-  <section class="flex gap-2 justify-center items-center">
-    filter:
-    <input type="text" v-model="filterBy.name" ref="txtInput" @input="setFilter" placeholder="Search...." />
+  <section class="flex gap-2 justify-center items-center flex-col">
+    <el-input v-model="filterBy.name" ref="txtInput" @input="setFilter" class="w-50 m-2" placeholder="Search...." :prefix-icon="Search" />
 
-    <el-select v-model="filterBy.labels" multiple @change="setFilter" placeholder="Select" style="width: 240px">
-      <el-option v-for="item in options" :key="item" :label="item" :value="item" />
-    </el-select>
+    <section class="flex gap-2 items-center justify-between">
+      <el-select v-model="filterBy.labels" multiple @change="setFilter" placeholder="Select" style="width: 240px">
+        <el-option v-for="item in options" :key="item" :label="item" :value="item" />
+      </el-select>
+      <div>
+        <el-radio-group v-model="filterBy.stock" @change="setFilter">
+          <el-radio-button label="All" />
+          <el-radio-button label="In Stock" />
+          <el-radio-button label="Out Of Stock" />
+        </el-radio-group>
+      </div>
+    </section>
 
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="all" hidden /> All |</label>
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="inStock" hidden /> In Stock |</label>
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.stock" @change="setFilter" value="outOfStock" hidden /> Out Of Stock </label>
-  </section>
-  <section class="flex gap-2 items-center">
-    sort:
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="name" hidden /> Name </label>
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="price" hidden /> Price </label>
-    <label class="cursor-pointer"> <input type="radio" v-model="filterBy.sortBy" @change="setFilter" value="createdAt" hidden /> Time </label>
+    <div>
+      <el-radio-group v-model="filterBy.sortBy" @change="setFilter">
+        <el-radio-button label="Name" />
+        <el-radio-button label="Price" />
+        <el-radio-button label="Time" />
+      </el-radio-group>
+    </div>
   </section>
 </template>
 
 <script>
+import { Search } from '@element-plus/icons-vue'
+
 export default {
   name: 'toy-filter',
   data() {
@@ -31,6 +39,7 @@ export default {
         sortBy: '',
       },
       options: ['Doll', 'Battery Powered', 'Baby', 'Puzzle', 'Video Game'],
+      Search,
     }
   },
   methods: {

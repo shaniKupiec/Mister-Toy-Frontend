@@ -1,0 +1,77 @@
+::selection {
+    background-color: $clr0;
+    color: $clr3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Bahnschrift, sans-serif;
+    color: $clr0;
+    line-height: lh(26px);
+
+    @media (min-width: 1000px) {
+        font-size: 13px;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: lighten($clr2, 5%);
+
+    // @include for-normal-layout {
+    //     &.sidebar-open {
+    //         overflow: hidden;
+    //     }
+    // }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0 0 1rem;
+}
+
+img {
+    width: 100%;
+}
+
+button,
+input {
+    cursor: pointer;
+}
+
+.btn {
+    @include btn;
+
+    &-dark {
+        @include btn($type: dark);
+    }
+
+    &-light {
+        @include btn($type: light);
+    }
+}
+
+// links
+a {
+    color: $clr0;
+    text-decoration: none;
+    
+
+    // &.active {
+    //     background-color: $clr1;
+    //     color: $clr2;
+    // }
+}
+
+// mark {
+//     color: $clr1;
+//     background-color: transparent;
+// }

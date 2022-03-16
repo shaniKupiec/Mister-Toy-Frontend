@@ -1,7 +1,7 @@
 <template>
-  <section class="main-layout">
+  <section class="main-toy-app">
     <toy-filter @setFilter="setFilter" />
-    <el-button  @click="addNew" round>Add New Toy</el-button>
+    <el-button @click="addNew" round class="addBtn">Add New Toy</el-button>
     <toy-list :toys="toys" @removeToy="removeToy" />
     <el-button v-if="isLoading" type="primary" loading class="loading">Loading</el-button>
   </section>
@@ -47,10 +47,3 @@ export default {
   unmounted() {},
 }
 </script>
-
-<style>
-
-.loading{
-  left: 50%;
-}
-</style>

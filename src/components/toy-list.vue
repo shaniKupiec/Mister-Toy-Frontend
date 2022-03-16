@@ -1,7 +1,7 @@
 <template>
-  <ul class="clean-list flex flex-wrap">
+  <section class="main-grid">
     <toy-preview v-for="toy in toys" :key="toy._id" :toy="toy" @removeToy="removeToy" />
-  </ul>
+  </section>
 </template>
 
 <script>

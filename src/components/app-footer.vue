@@ -1,6 +1,6 @@
 <template>
   <footer class="footer-container">
-    <section class="main-layout main-footer flex justify-center items-center">
+    <section class="main-footer flex justify-center items-center">
       <p>&copy; Coffeerights Shani Kupiec {{ currYear }}</p>
     </section>
   </footer>
