@@ -2,15 +2,17 @@
 @import './setup/typography';
 @import './setup/variables';
 @import './setup/mixins';
-@import './setup/functions';
+// @import './setup/functions';
 
 // // BASICS
 @import './basic/helpers';
 @import './basic/base';
 @import './basic/layout';
 
+// VIEWS
+@import './views/toy-app';
+
 // // COMPONENTS
 @import './components/header-footer';
-@import './components/toy-app';
 @import './components/custome-card';
 @import './components/toy-stock-sticker';

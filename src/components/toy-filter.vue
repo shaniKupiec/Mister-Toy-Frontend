@@ -35,7 +35,7 @@ export default {
       filterBy: {
         name: '',
         labels: [],
-        stock: 'all',
+        stock: 'All',
         sortBy: '',
       },
       options: ['Doll', 'Battery Powered', 'Baby', 'Puzzle', 'Video Game'],
