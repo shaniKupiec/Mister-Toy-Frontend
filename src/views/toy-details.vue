@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
+import { Delete } from '@element-plus/icons-vue'
 import toyReview from '../components/toy-review.vue'
 import customCard from '../components/custom-card.vue'
 
@@ -41,25 +41,22 @@ export default {
       Delete,
     }
   },
-  created() {
+  async created() {
     const { toyId } = this.$route.params
-    this.$store
+    this.toy = await this.$store
       .dispatch({
         type: 'getToyById',
         toyId,
       })
-      .then((toy) => {
-        this.toy = toy
-      })
   },
   methods: {
-    removeToy() {
-      this.$store
+    async removeToy() {
+      await this.$store
         .dispatch({
           type: 'removeToy',
           toyId: this.toy._id,
         })
-        .then(() => this.goBack())
+      this.goBack()
     },
     goBack() {
       this.$router.push('/toy')
@@ -73,14 +70,6 @@ export default {
     formattedPrice() {
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(this.toy.price)
     },
-    // inStock() {
-    //   return this.toy.inStock ? 'in stock' : 'out  of stock'
-    // },
   },
-  // watch: {
-  //   '$route.params.toyId'() {
-  //     if (this.$route.params.toyId) this.loadTodo()
-  //   },
-  // },
 }
 </script>

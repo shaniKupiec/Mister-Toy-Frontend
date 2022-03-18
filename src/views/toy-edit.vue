@@ -16,20 +16,17 @@
 
 <script>
 import { toyService } from '../services/toy.service.js'
-import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
+import { Check } from '@element-plus/icons-vue'
 
 export default {
   name: 'toy-edit',
-  created() {
+  async created() {
     const { toyId } = this.$route.params
     if (toyId) {
-      this.$store
+      this.toyToEdit = await this.$store
         .dispatch({
           type: 'getToyById',
           toyId,
-        })
-        .then((toy) => {
-          this.toyToEdit = toy
         })
     } else this.toyToEdit = toyService.getEmptyToy()
   },
@@ -41,13 +38,13 @@ export default {
     }
   },
   methods: {
-    save() {
-      this.$store
+    async save() {
+      await this.$store
         .dispatch({
           type: 'saveToy',
           toy: this.toyToEdit,
         })
-        .then(() => this.goBack())
+        this.goBack()
     },
     goBack() {
       this.$router.push('/toy')

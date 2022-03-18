@@ -13,23 +13,22 @@ export const toyService = {
   getEmptyToy,
 }
 
-function query(filterBy) {
-  // return axios.get(URL, { params: filterBy }).then((res) => res.data)
-  return axios.get(_getUrl(), { params: filterBy }).then((res) => res.data)
+async function query(filterBy) {
+  const res = await axios.get(_getUrl(), { params: filterBy })
+  return res.data
 }
 
-function getById(toyId) {
-  // return axios.get(URL + toyId).then((res) =>  res.data)
-  return axios.get(_getUrl(toyId)).then((res) => res.data)
+async function getById(toyId) {
+  const res = await axios.get(_getUrl(toyId))
+  return res.data
 }
 
-function save(toy) {
-  // return toy._id ? axios.put(URL + toy._id, toy).then((res) => res.data) : axios.post(URL, toy).then((res) => res.data)
-  return toy._id ? axios.put(_getUrl(toy._id), toy).then((res) => res.data) : axios.post(_getUrl(), toy).then((res) => res.data)
+async function save(toy) {
+  const res = toy._id ? await axios.put(_getUrl(toy._id), toy) : await axios.post(_getUrl(), toy)
+  return res.data
 }
 
 function remove(toyId) {
-  // return axios.delete(URL + toyId)
   return axios.delete(_getUrl(toyId))
 }
 

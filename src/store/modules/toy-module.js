@@ -28,53 +28,46 @@ export default {
     },
   },
   actions: {
-    loadToys({ commit, state }) {
+    async loadToys({ commit, state }) {
       commit({ type: 'setIsLoading', isLoading: true })
-      toyService
-        .query(state.filterBy)
-        .then((toys) => {
-          commit({ type: 'setToys', toys })
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
-        .finally(() => {
-          commit({ type: 'setIsLoading', isLoading: false })
-        })
+      try {
+        const toys = await toyService.query(state.filterBy)
+        commit({ type: 'setToys', toys })
+      } catch(err) {
+        console.log('err', err)
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
+      }
     },
-    removeToy({ commit }, { toyId }) {
-      toyService
-        .remove(toyId)
-        .then(() => {
-          commit({ type: 'removeToy', toyId })
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
+    async removeToy({ commit }, { toyId }) {
+      try{
+        await toyService.remove(toyId)
+        commit({ type: 'removeToy', toyId })
+      } catch(err){
+        console.log('err', err)
+      }
     },
-    getToyById(context, { toyId }) {
-      return toyService
-        .getById(toyId)
-        .then((toy) => JSON.parse(JSON.stringify(toy)))
-        .catch((err) => {
-          console.log('err', err)
-        })
+    async getToyById(_, { toyId }) {
+      try {
+        const toy = await toyService.getById(toyId)
+        return JSON.parse(JSON.stringify(toy))
+      } catch(err) {
+        console.log('err', err)
+      }
     },
-    saveToy({ commit }, { toy }) {
+    async saveToy({ commit }, { toy }) {
       const newToy = JSON.parse(JSON.stringify(toy))
-      toyService
-        .save(newToy)
-        .then((savedToy) => {
-          commit({ type: 'saveToy', savedToy })
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
+      try{
+        const savedToy = await toyService.save(newToy)
+        commit({ type: 'saveToy', savedToy })
+      } catch(err){
+        console.log('err', err)
+      }
     },
     filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy })
       dispatch({ type: 'loadToys' })
-      console.log(filterBy, 'filterBy')
+      // console.log(filterBy, 'filterBy')
     },
   },
 }
