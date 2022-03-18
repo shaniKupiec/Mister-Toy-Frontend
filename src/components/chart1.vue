@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     preperDate() {
-      const res = this.$store.getters.toysForDisplay.reduce((acc, toy) => {
+      const res = this.$store.getters.toys.reduce((acc, toy) => {
         toy.labels.forEach((label) => {
           if (!acc[label]) {
             acc[label] = {

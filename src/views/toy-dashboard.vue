@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     isToys() {
-      return this.$store.getters.toysForDisplay.length
+      return this.$store.getters.toys.length
     },
   },
 }

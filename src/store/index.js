@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-import toyStore from './modules/toy-module.js'
+import toyModules from './modules/toy-module.js'
+import userModules from './modules/user-module.js'
 
 // create a store instance
 const store = createStore({
@@ -19,7 +20,8 @@ const store = createStore({
   },
   actions: {},
   modules: {
-    toyStore,
+    toyModules,
+    userModules
   },
 })
 

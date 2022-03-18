@@ -39,12 +39,16 @@ export default {
   },
   methods: {
     async save() {
-      await this.$store
-        .dispatch({
-          type: 'saveToy',
-          toy: this.toyToEdit,
-        })
-        this.goBack()
+      try{
+        await this.$store
+          .dispatch({
+            type: 'saveToy',
+            toy: this.toyToEdit,
+          })
+          this.goBack()
+      } catch(err){
+        console.log('err', err);
+      }
     },
     goBack() {
       this.$router.push('/toy')

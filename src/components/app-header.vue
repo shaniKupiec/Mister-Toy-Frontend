@@ -8,6 +8,7 @@
         <router-link class="link" to="/about">About</router-link>
         <router-link class="link" to="/dashboard">Dashboard</router-link>
         <router-link class="link" to="/shop">Our Shops</router-link>
+        <router-link class="link" to="/user">User</router-link>
       </nav>
     </section>
   </header>

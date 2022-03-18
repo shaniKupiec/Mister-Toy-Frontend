@@ -1,4 +1,6 @@
 import axios from 'axios'
+axios.defaults.withCredentials = true
+import { utilService } from './util.service.js'
 
 function _getUrl(id = '') {
   const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/toy' : '//localhost:3030/api/toy'
@@ -14,37 +16,35 @@ export const toyService = {
 }
 
 async function query(filterBy) {
-  const res = await axios.get(_getUrl(), { params: filterBy })
+  const res = await axios.get(_getUrl(), { params: filterBy }, { withCredentials: true })
   return res.data
 }
 
 async function getById(toyId) {
-  const res = await axios.get(_getUrl(toyId))
+  const res = await axios.get(_getUrl(toyId), { withCredentials: true })
   return res.data
 }
 
 async function save(toy) {
-  const res = toy._id ? await axios.put(_getUrl(toy._id), toy) : await axios.post(_getUrl(), toy)
+  const res = toy._id ? await axios.put(_getUrl(toy._id), toy, { withCredentials: true }) :
+    await axios.post(_getUrl(), toy, { withCredentials: true })
   return res.data
 }
 
 function remove(toyId) {
-  return axios.delete(_getUrl(toyId))
+  return axios.delete(_getUrl(toyId), { withCredentials: true })
 }
 
 function getEmptyToy() {
+  const img = `src/assets/images/${utilService.getRandomInt(0, 11)}.png`
+  console.log(img);
   return {
     name: '',
     price: 1,
     labels: [],
     inStock: true,
     reviews: [],
-    img: `src/assets/images/${_getRandomInt(0, 11)}.png`,
+    img,
+    // img: `src/assets/images/${utilService.getRandomInt(0, 11)}.png`,
   }
-}
-
-function _getRandomInt(min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1) + min)
 }

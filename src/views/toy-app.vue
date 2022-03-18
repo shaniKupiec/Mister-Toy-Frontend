@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     toys() {
-      return this.$store.getters.toysForDisplay
+      return this.$store.getters.toys
     },
     isLoading() {
       return this.$store.getters.isLoading

@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     showPrices() {
-      const toys = this.$store.getters.toysForDisplay
+      const toys = this.$store.getters.toys
       var outOfStock = toys.reduce((acc, toy) => {
         if (!toy.inStock) acc++
         return acc

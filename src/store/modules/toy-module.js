@@ -6,7 +6,7 @@ export default {
     filterBy: null,
   },
   getters: {
-    toysForDisplay(state) {
+    toys(state) {
       return state.toys
     },
   },
@@ -64,10 +64,9 @@ export default {
         console.log('err', err)
       }
     },
-    filter({ commit, dispatch }, { filterBy }) {
+    async filter({ commit, dispatch }, { filterBy }) {
       commit({ type: 'setFilter', filterBy })
       dispatch({ type: 'loadToys' })
-      // console.log(filterBy, 'filterBy')
     },
   },
 }

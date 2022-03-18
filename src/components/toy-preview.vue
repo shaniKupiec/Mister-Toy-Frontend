@@ -5,6 +5,7 @@
     </template>
 
     <img :src="toy.img" alt="">
+    <div>created by {{ toy.creator.fullname }}</div>
     <div>{{ formattedPrice }}</div>
     <div v-if="!toy.inStock" class="stock-sticker uppercase round">out  of stock</div>
 
@@ -22,7 +23,7 @@
 
 <script>
 import customCard from '../components/custom-card.vue'
-import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
+import { Edit, Delete } from '@element-plus/icons-vue'
 
 export default {
   name: 'toy-preview',
