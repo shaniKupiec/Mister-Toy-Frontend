@@ -2,7 +2,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 
 function _getUrl(id = '') {
-  const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/user' : '//localhost:3030/api/user'
+  const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/user' : '//localhost:3000/api/user'
   return `${BASE_URL}/${id}`
 }
 

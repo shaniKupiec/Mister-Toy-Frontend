@@ -1,6 +1,6 @@
 <template>
   <section>
-    <!-- <el-button v-if="isLoading" type="primary" loading class="loading">Loading</el-button>
+    <el-button v-if="isLoading" type="primary" loading class="loading">Loading</el-button>
     <section v-if="loggedinUser">
       <pre>{{ loggedinUser }}</pre>
       <ul v-if="loggedinUser.isAdmin">
@@ -25,8 +25,7 @@
         <input type="text" v-model="password" placeholder="Enter password" />
         <button>Signup</button>
       </form>
-    </section> -->
-    HI
+    </section>
   </section>
 </template>
 
