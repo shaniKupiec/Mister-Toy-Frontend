@@ -11,10 +11,16 @@ export default {
     users(state) {
       return state.users
     },
+    loggedInUser(state) {
+      return state.loggedInUser
+    },
   },
   mutations: {
     setUsers(state, { users }) {
       state.users = users
+    },
+    setLoggedInUser(state, { loggedInUser }) {
+      state.loggedInUser = loggedInUser
     },
     removeUser(state, { userId }) {
       const idx = state.users.findIndex((user) => user._id === userId)
@@ -35,17 +41,28 @@ export default {
       try {
         const users = await userService.query(state.filterBy)
         commit({ type: 'setUsers', users })
-      } catch(err) {
+      } catch (err) {
+        console.log('err', err)
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
+      }
+    },
+    async loadLoggedInUser({ commit, state }) {
+      commit({ type: 'setIsLoading', isLoading: true })
+      try {
+        const loggedInUser = await autoService.getLoggedinUser()
+        commit({ type: 'setLoggedInUser', loggedInUser })
+      } catch (err) {
         console.log('err', err)
       } finally {
         commit({ type: 'setIsLoading', isLoading: false })
       }
     },
     async removeUser({ commit }, { userId }) {
-      try{
+      try {
         await userService.remove(userId)
         commit({ type: 'removeUser', userId })
-      } catch(err){
+      } catch (err) {
         console.log('err', err)
       }
     },
@@ -53,33 +70,32 @@ export default {
       try {
         const user = await userService.getById(userId)
         return JSON.parse(JSON.stringify(user))
-      } catch(err) {
+      } catch (err) {
         console.log('err', err)
       }
     },
     async saveUser({ commit }, { user }) {
       const newUser = JSON.parse(JSON.stringify(user))
-      try{
-        const savedUser = user._id ? await userService.update(newUser) : 
-          await autoService.signup(user)
+      try {
+        const savedUser = user._id ? await userService.update(newUser) : await autoService.signup(user)
         commit({ type: 'saveUser', savedUser })
-      } catch(err){
+      } catch (err) {
         console.log('err', err)
       }
     },
     async login({ commit }, { userInfo }) {
-      try{
+      try {
         await autoService.login(userInfo)
         // commit({ type: 'saveUser', savedUser })
-      } catch(err){
+      } catch (err) {
         console.log('err', err)
       }
     },
     async logout({ commit }) {
-      try{
-        await autoService.logout(userInfo)
+      try {
+        await autoService.logout()
         // commit({ type: 'saveUser', savedUser })
-      } catch(err){
+      } catch (err) {
         console.log('err', err)
       }
     },

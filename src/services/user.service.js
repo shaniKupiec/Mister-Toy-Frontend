@@ -11,7 +11,6 @@ export const userService = {
   getById,
   update,
   remove,
-  // getLoggedinUser,
 }
 
 async function query(filterBy = {}) {
@@ -46,24 +45,9 @@ async function update(user) {
 
 async function remove(userId) {
   try {
-    const res = await axios.delete(_getUrl('user', userId), { withCredentials: true })
+    await axios.delete(_getUrl('user', userId), { withCredentials: true })
   } catch(err) {
     console.log('err', err);
     throw err
   }
 }
-
-// function getLoggedinUser() {
-//   return _load(KEY)
-// }
-
-// const KEY = 'user'
-
-// function _load(key) {
-//   var val = localStorage.getItem(key)
-//   return (val)? JSON.parse(val) : null;
-// }
-
-// function _store(key, val) {
-//   localStorage[key] = JSON.stringify(val);
-// }

@@ -10,6 +10,7 @@ export const autoService = {
   login,
   signup,
   logout,
+  getLoggedinUser,
 }
 
 async function login({ username, password }) {
@@ -37,6 +38,16 @@ async function signup({ fullname, username, password }) {
 async function logout() {
   try {
     await axios.post(`${_getUrl()}/logout`, { withCredentials: true })
+    // _store(KEY, '')
+  } catch(err) {
+    console.log('err', err);
+    throw err
+  }
+}
+
+async function getLoggedinUser() {
+  try {
+    await axios.get(`${_getUrl()}/loggedInUser`, { withCredentials: true })
     // _store(KEY, '')
   } catch(err) {
     console.log('err', err);

@@ -16,6 +16,7 @@ export default {
   name: 'app',
   created() {
     this.$store.dispatch({ type: 'loadToys'})
+    this.$store.dispatch({ type: 'loadLoggedInUser'})
   },
   methods: {},
   components: {
