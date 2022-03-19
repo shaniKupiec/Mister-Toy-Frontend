@@ -36,6 +36,7 @@ export default {
       fullname: '',
       username: '',
       password: '',
+      loggedinUser: this.$store.getters.loggedInUser,
     }
   },
   computed: {
@@ -48,9 +49,9 @@ export default {
         console.log(err)
       }
     },
-    loggedinUser() {
-      return this.$store.getters.loggedInUser
-    },
+    // loggedinUser() {
+    //   return this.$store.getters.loggedInUser
+    // },
     isLoading() {
       return this.$store.getters.isLoading
     },
@@ -58,12 +59,13 @@ export default {
   methods: {
     async login() {
       try {
-        // this.loggedinUser =
         const userInfo = { username: this.username, password: this.password } //correct
         await this.$store.dispatch({
           type: 'login',
           userInfo,
         })
+        this.loggedinUser = this.$store.getters.loggedInUser
+        console.log(this.$store.getters.loggedInUser);
       } catch (err) {
         console.log(err)
       }
@@ -76,6 +78,7 @@ export default {
           type: 'saveUser',
           user,
         })
+        this.loggedinUser = this.$store.getters.loggedInUser
       } catch (err) {
         console.log(err)
       }
@@ -83,9 +86,9 @@ export default {
     async logout() {
       try {
         await this.$store.dispatch({
-          type: 'logout'
+          type: 'logout',
         })
-        // this.loggedinUser = null
+        this.loggedinUser = null
       } catch (err) {
         console.log(err)
       }

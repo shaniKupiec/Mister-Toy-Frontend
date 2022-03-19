@@ -1,5 +1,5 @@
 import { userService } from '../../services/user.service'
-import { autoService } from '../../services/auto.service'
+import { authService } from '../../services/auth.service'
 
 export default {
   state: {
@@ -50,7 +50,7 @@ export default {
     async loadLoggedInUser({ commit, state }) {
       commit({ type: 'setIsLoading', isLoading: true })
       try {
-        const loggedInUser = await autoService.getLoggedinUser()
+        const loggedInUser = await authService.getLoggedinUser()
         commit({ type: 'setLoggedInUser', loggedInUser })
       } catch (err) {
         console.log('err', err)
@@ -77,7 +77,7 @@ export default {
     async saveUser({ commit }, { user }) {
       const newUser = JSON.parse(JSON.stringify(user))
       try {
-        const savedUser = user._id ? await userService.update(newUser) : await autoService.signup(user)
+        const savedUser = user._id ? await userService.update(newUser) : await authService.signup(user)
         commit({ type: 'saveUser', savedUser })
       } catch (err) {
         console.log('err', err)
@@ -85,7 +85,7 @@ export default {
     },
     async login({ commit }, { userInfo }) {
       try {
-        await autoService.login(userInfo)
+        await authService.login(userInfo)
         // commit({ type: 'saveUser', savedUser })
       } catch (err) {
         console.log('err', err)
@@ -93,7 +93,7 @@ export default {
     },
     async logout({ commit }) {
       try {
-        await autoService.logout()
+        await authService.logout()
         // commit({ type: 'saveUser', savedUser })
       } catch (err) {
         console.log('err', err)
