@@ -1,23 +1,15 @@
-import axios from 'axios'
-axios.defaults.withCredentials = true
-
-function _getUrl(id = '') {
-  const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/auth' : '//localhost:3030/api/auth'
-  return `${BASE_URL}/${id}`
-}
+import { httpService } from './http.service'
 
 export const authService = {
   login,
   signup,
   logout,
-  getLoggedinUser,
+  // getLoggedinUser,
 }
 
 async function login({ username, password }) {
   try {
-    const res = await axios.post(`${_getUrl()}login`, { username, password }, { withCredentials: true })
-    // _store(KEY, res.data)
-    return res.data
+    await httpService.post(`auth/login`, { username, password })
   } catch(err) {
     console.log('err', err);
     throw err
@@ -26,9 +18,7 @@ async function login({ username, password }) {
 
 async function signup({ fullname, username, password }) {
   try {
-    const res = await axios.post(`${_getUrl()}signup`, { fullname, username, password }, { withCredentials: true })
-    // _store(KEY, res.data)
-    return res.data
+    return await httpService.post(`auth/signup`, { fullname, username, password })
   } catch(err) {
     console.log('err', err);
     throw err
@@ -37,20 +27,18 @@ async function signup({ fullname, username, password }) {
 
 async function logout() {
   try {
-    await axios.post(`${_getUrl()}logout`, { withCredentials: true })
-    // _store(KEY, '')
+    return await httpService.post(`auth/logout`)
   } catch(err) {
     console.log('err', err);
     throw err
   }
 }
 
-async function getLoggedinUser() {
-  try {
-    await axios.get(`${_getUrl()}loggedInUser`, { withCredentials: true })
-    // _store(KEY, '')
-  } catch(err) {
-    console.log('err', err);
-    throw err
-  }
-}
+// async function getLoggedinUser() {
+//   try {
+//     return await httpService.get(`auth/loggedInUser`)
+//   } catch(err) {
+//     console.log('err', err);
+//     throw err
+//   }
+// }

@@ -1,10 +1,4 @@
-import axios from 'axios'
-axios.defaults.withCredentials = true
-
-function _getUrl(id = '') {
-  const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/user' : '//localhost:3030/api/user'
-  return `${BASE_URL}/${id}`
-}
+import { httpService } from './http.service'
 
 export const userService = {
   query,
@@ -15,8 +9,7 @@ export const userService = {
 
 async function query(filterBy = {}) {
   try {
-    const res = await axios.get(_getUrl(), { params: filterBy }, { withCredentials: true })
-    return res.data
+    return await httpService.get('user/', { params: filterBy })
   } catch(err) {
     console.log('err', err);
     throw err
@@ -25,8 +18,7 @@ async function query(filterBy = {}) {
 
 async function getById(userId) {
   try {
-    const res = await axios.get(_getUrl(userId), { withCredentials: true })
-    return res.data
+    return await httpService.get(`toy/${userId}`)
   } catch(err) {
     console.log('err', err);
     throw err
@@ -35,8 +27,7 @@ async function getById(userId) {
 
 async function update(user) {
   try {
-    const res = await axios.get(_getUrl(user._id), user, { withCredentials: true })
-    return res.data
+    return await httpService.get(`toy/${user._id}`, user)
   } catch(err) {
     console.log('err', err);
     throw err
@@ -45,7 +36,7 @@ async function update(user) {
 
 async function remove(userId) {
   try {
-    await axios.delete(_getUrl(userId), { withCredentials: true })
+    await httpService.delete(`toy/${userId}`)
   } catch(err) {
     console.log('err', err);
     throw err

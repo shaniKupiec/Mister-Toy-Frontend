@@ -1,11 +1,4 @@
-import axios from 'axios'
-axios.defaults.withCredentials = true
-import { utilService } from './util.service.js'
-
-function _getUrl(id = '') {
-  const BASE_URL = process.env.NODE_ENV !== 'development' ? '/api/toy' : '//localhost:3030/api/toy'
-  return `${BASE_URL}/${id}`
-}
+import { httpService } from './http.service'
 
 export const toyService = {
   query,
@@ -16,28 +9,23 @@ export const toyService = {
 }
 
 async function query(filterBy) {
-  const res = await axios.get(_getUrl(), { params: filterBy }, { withCredentials: true })
-  return res.data
+  return await httpService.get('toy/', { params: filterBy })
 }
 
 async function getById(toyId) {
-  const res = await axios.get(_getUrl(toyId), { withCredentials: true })
-  return res.data
+  return await httpService.get(`toy/${toyId}`)
 }
 
 async function save(toy) {
-  const res = toy._id ? await axios.put(_getUrl(toy._id), toy, { withCredentials: true }) :
-    await axios.post(_getUrl(), toy, { withCredentials: true })
-  return res.data
+  return toy._id ? await httpService.put(`toy/${toy._id}`, toy) : await httpService.post('toy/', toy)
 }
 
 function remove(toyId) {
-  return axios.delete(_getUrl(toyId), { withCredentials: true })
+  return httpService.delete(`toy/${toyId}`)
 }
 
 function getEmptyToy() {
   const img = `src/assets/images/${utilService.getRandomInt(0, 11)}.png`
-  console.log(img);
   return {
     name: '',
     price: 1,
@@ -45,6 +33,5 @@ function getEmptyToy() {
     inStock: true,
     reviews: [],
     img,
-    // img: `src/assets/images/${utilService.getRandomInt(0, 11)}.png`,
   }
 }
