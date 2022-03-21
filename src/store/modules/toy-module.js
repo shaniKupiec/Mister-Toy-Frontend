@@ -3,7 +3,7 @@ import { toyService } from '../../services/toy.service'
 export default {
   state: {
     toys: [],
-    filterBy: null,
+    filterBy: {stock: 'All'},
   },
   getters: {
     toys(state) {

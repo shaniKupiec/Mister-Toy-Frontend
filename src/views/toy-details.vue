@@ -1,8 +1,10 @@
 <template>
   <custom-card v-if="toy" class="toy-details">
     <template v-slot:header>
-      <span> {{ toy.name }} </span>
+      <div> {{ toy.name }} </div>
       <div>{{ formattedPrice }}</div>
+      <img :src="toy.img" alt="">
+      <!-- <pre>{{toy}}</pre> -->
     </template>
 
     <div v-if="!toy.inStock" class="stock-sticker uppercase round">out of stock</div>
@@ -14,7 +16,8 @@
 
     <section class="grey">
       <div v-if="toy.labels.length">Labled as: {{ toy.labels.join(', ') }}</div>
-      <!-- <div>on sale since {{ formattedTime }}</div> -->
+      <div>on sale since {{ formattedTime }}</div>
+      <div>created by {{ toy.creator.fullname }}</div>
     </section>
 
     <template v-slot:footer>
