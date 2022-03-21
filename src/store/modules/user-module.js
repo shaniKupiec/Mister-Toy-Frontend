@@ -79,14 +79,15 @@ export default {
       try {
         const savedUser = user._id ? await userService.update(newUser) : await authService.signup(user)
         commit({ type: 'saveUser', savedUser })
+        commit({ type: 'setLoggedInUser', loggedInUser: savedUser })
       } catch (err) {
         console.log('err', err)
       }
     },
     async login({ commit }, { userInfo }) {
       try {
-        await authService.login(userInfo)
-        // commit({ type: 'saveUser', savedUser })
+        const loggedInUser = await authService.login(userInfo)
+        commit({ type: 'setLoggedInUser', loggedInUser })
       } catch (err) {
         console.log('err', err)
       }
@@ -94,7 +95,7 @@ export default {
     async logout({ commit }) {
       try {
         await authService.logout()
-        // commit({ type: 'saveUser', savedUser })
+        commit({ type: 'setLoggedInUser', loggedInUser: '' })
       } catch (err) {
         console.log('err', err)
       }

@@ -45,7 +45,7 @@ export default {
             type: 'saveToy',
             toy: this.toyToEdit,
           })
-          this.goBack()
+        this.goBack()
       } catch(err){
         console.log('err', err);
       }

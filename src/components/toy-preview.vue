@@ -5,7 +5,8 @@
     </template>
 
     <img :src="toy.img" alt="">
-    <div>created by {{ toy.creator.fullname }}</div>
+    <!-- <div>created by {{ toy.creator.fullname }}</div> -->
+    <!-- <pre> {{ toy.creator }} </pre> -->
     <div>{{ formattedPrice }}</div>
     <div v-if="!toy.inStock" class="stock-sticker uppercase round">out  of stock</div>
 

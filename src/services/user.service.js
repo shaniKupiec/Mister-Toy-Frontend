@@ -1,4 +1,5 @@
 import { httpService } from './http.service'
+const ENDPOINT = 'user'
 
 export const userService = {
   query,
@@ -9,7 +10,7 @@ export const userService = {
 
 async function query(filterBy = {}) {
   try {
-    return await httpService.get('user/', { params: filterBy })
+    return await httpService.get(ENDPOINT + '/', { params: filterBy })
   } catch(err) {
     console.log('err', err);
     throw err
@@ -18,7 +19,7 @@ async function query(filterBy = {}) {
 
 async function getById(userId) {
   try {
-    return await httpService.get(`toy/${userId}`)
+    return await httpService.get(`${ENDPOINT}/${userId}`)
   } catch(err) {
     console.log('err', err);
     throw err
@@ -27,7 +28,7 @@ async function getById(userId) {
 
 async function update(user) {
   try {
-    return await httpService.get(`toy/${user._id}`, user)
+    return await httpService.get(`${ENDPOINT}/${user._id}`, user)
   } catch(err) {
     console.log('err', err);
     throw err
@@ -36,7 +37,7 @@ async function update(user) {
 
 async function remove(userId) {
   try {
-    await httpService.delete(`toy/${userId}`)
+    await httpService.delete(`${ENDPOINT}/${userId}`)
   } catch(err) {
     console.log('err', err);
     throw err

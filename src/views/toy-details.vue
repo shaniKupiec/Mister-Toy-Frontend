@@ -6,15 +6,15 @@
     </template>
 
     <div v-if="!toy.inStock" class="stock-sticker uppercase round">out of stock</div>
-    <ul v-if="toy.reviews.length" class="clean-list">
+    <!-- <ul v-if="toy.reviews.length" class="clean-list">
       <li v-for="review in toy.reviews" :key="review">
         <toy-review :review="review" />
       </li>
-    </ul>
+    </ul> -->
 
     <section class="grey">
       <div v-if="toy.labels.length">Labled as: {{ toy.labels.join(', ') }}</div>
-      <div>on sale since {{ formattedTime }}</div>
+      <!-- <div>on sale since {{ formattedTime }}</div> -->
     </section>
 
     <template v-slot:footer>

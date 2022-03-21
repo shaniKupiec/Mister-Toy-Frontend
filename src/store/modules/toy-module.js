@@ -20,6 +20,9 @@ export default {
     },
     saveToy(state, { savedToy }) {
       const idx = state.toys.findIndex((currToy) => currToy._id === savedToy._id)
+      console.log('savedToy',savedToy);
+      state.toys.map((t) => console.log(t._id))
+      console.log('idx',idx);
       if (idx !== -1) state.toys.splice(idx, 1, savedToy)
       else state.toys.unshift(savedToy)
     },

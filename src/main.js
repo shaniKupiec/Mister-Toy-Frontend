@@ -8,7 +8,6 @@ import './registerServiceWorker'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueGoogleMaps from '@fawmi/vue-google-maps'
-Vue.config.productionTip = false
 
 const app = createApp(App)
 app.use(ElementPlus)

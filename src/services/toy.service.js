@@ -1,4 +1,6 @@
 import { httpService } from './http.service'
+import { utilService } from './util.service'
+const ENDPOINT = 'toy'
 
 export const toyService = {
   query,
@@ -9,19 +11,19 @@ export const toyService = {
 }
 
 async function query(filterBy) {
-  return await httpService.get('toy/', { params: filterBy })
+  return await httpService.get(ENDPOINT, filterBy)
 }
 
 async function getById(toyId) {
-  return await httpService.get(`toy/${toyId}`)
+  return await httpService.get(`${ENDPOINT}/${toyId}`)
 }
 
 async function save(toy) {
-  return toy._id ? await httpService.put(`toy/${toy._id}`, toy) : await httpService.post('toy/', toy)
+  return toy._id ? await httpService.put(`${ENDPOINT}/${toy._id}`, toy) : await httpService.post(ENDPOINT + '/', toy)
 }
 
 function remove(toyId) {
-  return httpService.delete(`toy/${toyId}`)
+  return httpService.delete(`${ENDPOINT}/${toyId}`)
 }
 
 function getEmptyToy() {
@@ -31,7 +33,6 @@ function getEmptyToy() {
     price: 1,
     labels: [],
     inStock: true,
-    reviews: [],
     img,
   }
 }
