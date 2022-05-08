@@ -10,7 +10,7 @@ export const toyService = {
   getEmptyToy,
 }
 
-async function query(filterBy) {
+async function query(filterBy = {}) {
   return await httpService.get(ENDPOINT, filterBy)
 }
 

@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import home from '../views/home.vue'
-import about from '../views/about.vue'
 import toyApp from '../views/toy-app.vue'
 import toyDetails from '../views/toy-details.vue'
 import toyEdit from '../views/toy-edit.vue'
@@ -16,11 +15,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: about
     },
     {
       path: '/dashboard',
