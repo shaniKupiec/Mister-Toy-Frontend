@@ -6,6 +6,7 @@
 
 ## Frontend Tech
 - Vue.js
+- Vuex
 - Axios
 - Element-plus,
 - Socket.io-client
