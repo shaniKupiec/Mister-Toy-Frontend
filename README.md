@@ -1,6 +1,7 @@
 # Mister Toy Frontend
 
-<p>Toy app that allows the user to add, edit and remove toys</p>
+<p>Advanced Toy Store with Googale Maps and Socket.IO</p>
+<p>End to end application</p>
 
 ## Tech
 - Vue.js
