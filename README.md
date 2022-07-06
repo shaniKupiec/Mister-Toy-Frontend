@@ -3,7 +3,7 @@
 <p>Advanced Toy Store with Googale Maps and Socket.IO</p>
 <p>End to end application</p>
 
-## Tech
+## Frontend Tech
 - Vue.js
 - Axios
 - Element-plus,
