@@ -6,13 +6,8 @@
 - Vue.js
 - Axios
 - Element-plus,
-- Socket.io
+- Socket.io-client
 - SCSS
-- Mongodb
-- Express
-- Cors
-- Bcrypt
-- REST API
 
 ## Features
 - Toys CRUD
